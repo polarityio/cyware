@@ -4,6 +4,10 @@ The Polarity Cyware integration allows Polarity to search Cyware indicators incl
 
 For more information on Cyware, please visit [official website](https://www.cyware.com/).
 
+| ![](./assets/integration-example-ip.png) | ![](./assets/integration-example-hash.png) |
+|------------------------------------------|--------------------------------------------|
+| *IP Address Example*                     | *Hash Example*                             |
+
 ## Dataminr Integration Options
 ### Cyware API URL
 The base URL of the Cyware API including the scheme (i.e., https://). For example, `https://myorg.cyware.com/ctixapi`
