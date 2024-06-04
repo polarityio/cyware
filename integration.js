@@ -26,10 +26,12 @@ const doLookup = async (entities, options, cb) => {
 
     cb(null, lookupResults);
   } catch (error) {
-    const err = parseErrorToReadableJson(error);
+    const parsedError = parseErrorToReadableJson(error);
+    parsedError.detail = parsedError.message;
+    delete parsedError.message;
 
-    Logger.error({ error, formattedError: err }, 'Get Lookup Results Failed');
-    cb({ detail: error.message || 'Lookup Failed', err });
+    Logger.error({ parsedError }, 'Get Lookup Results Failed');
+    cb(parsedError);
   }
 };
 

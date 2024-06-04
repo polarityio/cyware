@@ -7,27 +7,6 @@ const {
 } = require('polarity-integration-utils');
 const config = require('../config/config');
 
-const { DateTime } = require('luxon');
-
-const NodeCache = require('node-cache');
-const tokenCache = new NodeCache();
-
-const requestForAuth = createRequestWithDefaults({
-  config,
-  roundedSuccessStatusCodes: [200],
-  requestOptionsToOmitFromLogsKeyPaths: ['form.client_id', 'form.client_secret'],
-  postprocessRequestFailure: (error) => {
-    const errorResponseBody = JSON.parse(error.description);
-    error.message = `${error.message} - (${error.status})${
-      errorResponseBody.message || errorResponseBody.errorMessage
-        ? `| ${errorResponseBody.message || errorResponseBody.errorMessage}`
-        : ''
-    }`;
-
-    throw error;
-  }
-});
-
 const requestWithDefaults = createRequestWithDefaults({
   config,
   roundedSuccessStatusCodes: [200],
@@ -54,11 +33,11 @@ const requestWithDefaults = createRequestWithDefaults({
   },
   postprocessRequestFailure: (error) => {
     const errorResponseBody = JSON.parse(error.description);
-    error.message = `${error.message} - (${error.status})${
-      errorResponseBody.message || errorResponseBody.errorMessage
-        ? `| ${errorResponseBody.message || errorResponseBody.errorMessage}`
-        : ''
-    }`;
+    error.message = `${error.message} - (${error.status}) ${getOr(
+      '',
+      'errors.server.message',
+      errorResponseBody
+    )}`;
 
     throw error;
   }
