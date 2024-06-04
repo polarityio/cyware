@@ -20,6 +20,13 @@ const validateOptions = async (options, callback) => {
     .concat(apiUrlValidationError)
     .concat(appUrlValidationError);
 
+  if (options.minScore.value < 0 || options.minScore.value > 100) {
+    errors.push({
+      key: 'minScore',
+      message: 'Score must be between 0 and 100'
+    });
+  }
+
   callback(null, errors);
 };
 
