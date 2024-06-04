@@ -1,0 +1,191 @@
+{{#each details.indicators as |indicator indicator|}}
+    <div class="mb-1">
+      <a href="{{block.userOptions.appUrl}}/threatdata/indicator/{{indicator.id}}" class="p-link">
+        View in Cyware
+        {{fa-icon "external-link-square" class="external-link-icon"}}
+      </a>
+    </div>
+
+    {{#if indicator.description}}
+      <h1 class="p-title">{{fa-icon icon="info-circle" fixedWidth=true}} Description</h1>
+      <div class="description">
+        {{{indicator.description}}}
+      </div>
+    {{/if}}
+
+    <h1 class="p-title">{{fa-icon icon="info-circle" fixedWidth=true}} General Info</h1>
+
+    <div>
+      <span class="p-key">IOC Type:</span>
+      <span class="p-value">{{indicator.ioc_type}}</span>
+    </div>
+
+    <div>
+      <span class="p-key">Confidence Score:</span>
+      <span class="p-value colors {{indicator.confidence_score_class}}">
+        {{#if (eq indicator.confidence_score null)}}
+          0 / 100
+        {{else}}
+          {{indicator.confidence_score}} / 100
+        {{/if}}
+      </span>
+    </div>
+
+    <div>
+      <span class="p-key">Analyst Score:</span>
+      <span class="p-value colors {{indicator.analyst_score_class}}">
+        {{#if (eq indicator.analyst_score null)}}
+          0 / 100
+        {{else}}
+          {{indicator.analyst_score}} / 100
+        {{/if}}
+      </span>
+    </div>
+
+    <div class="tlp">
+      <span class="p-key">TLP:</span>
+      <span class="p-value tlp-text {{indicator.tlp_class}}">{{indicator.tlp}}</span>
+    </div>
+
+    {{#if indicator.first_seen}}
+      <div>
+        <span class="p-key">First Seen:</span>
+        <span class="p-value">
+            {{moment-format indicator.first_seen "MMM DD, YYYY, hh:mm A" timeZone=timezone}}
+        </span>
+      </div>
+    {{/if}}
+
+    <div>
+      <span class="p-key">Valid From:</span>
+      <span class="p-value">
+        {{#if (eq indicator.valid_from null)}}
+          NA
+        {{else}}
+          {{moment-format indicator.valid_from "MMM DD, YYYY, hh:mm A" timeZone=timezone}}
+        {{/if}}
+      </span>
+    </div>
+
+    <div>
+      <span class="p-key">Valid Until:</span>
+      <span class="p-value">
+        {{#if (eq indicator.valid_until null)}}
+          NA
+        {{else}}
+          {{moment-format indicator.valid_until "MMM DD, YYYY, hh:mm A" timeZone=timezone}}
+        {{/if}}
+      </span>
+    </div>
+
+    <div>
+      <span class="p-key">System Created Date:</span>
+      <span class="p-value">
+        {{#if (eq indicator.ctix_created null)}}
+          NA
+        {{else}}
+          {{moment-format indicator.ctix_created "MMM DD, YYYY, hh:mm A" timeZone=timezone}}
+        {{/if}}
+      </span>
+    </div>
+
+    <div>
+      <span class="p-key">System Modified Date:</span>
+      <span class="p-value">
+        {{#if (eq indicator.ctix_modified null)}}
+          NA
+        {{else}}
+          {{moment-format indicator.ctix_modified "MMM DD, YYYY, hh:mm A" timeZone=timezone}}
+        {{/if}}
+      </span>
+    </div>
+
+    <div class="info-bar mb-1 mt-2">
+      <div class="info-bar-row">
+        <div class="info-bar-pill">
+          <span class="info-bar-key">Deprecated</span>
+          <span class="info-bar-value">
+            {{#if indicator.is_deprecated}}<span class="green">Yes</span>{{else}}No{{/if}}
+          </span>
+        </div>
+        <div class="info-bar-pill">
+          <span class="info-bar-key">False Positive</span>
+          <span class="info-bar-value tlp">
+            {{#if indicator.is_false_positive}}<span class="green">Yes</span>{{else}}No{{/if}}
+          </span>
+        </div>
+
+      </div>
+      <div class="info-bar-row">
+        <div class="info-bar-pill">
+          <span class="info-bar-key">Reviewed</span>
+          <span class="info-bar-value">
+            {{#if indicator.is_reviewed}}<span class="green">Yes</span>{{else}}No{{/if}}
+          </span>
+        </div>
+        <div class="info-bar-pill">
+          <span class="info-bar-key">Whitelisted</span>
+          <span class="info-bar-value">
+            {{#if indicator.is_whitelisted}}<span class="green">Yes</span>{{else}}No{{/if}}
+          </span>
+        </div>
+      </div>
+      <div class="info-bar-row">
+        <div class="info-bar-pill">
+          <span class="info-bar-key">Manual review</span>
+          <span class="info-bar-value tlp">
+            {{#if indicator.manual_review}}<span class="green">Yes</span>{{else}}No{{/if}}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="p-title">
+      {{fa-icon icon="tags" fixedWidth=true}} Tags
+    </h1>
+    {{#if (gt indicator.tags.length 0)}}
+      {{#each indicator.tags as |tag|}}
+        <div class="tag">
+          {{tag}}
+        </div>
+      {{/each}}
+    {{else}}
+      None
+    {{/if}}
+
+
+    <h1 class="p-title">
+      {{fa-icon icon="book-open" fixedWidth=true}} Sources
+    </h1>
+    {{#if (gt indicator.sources.length 0)}}
+      {{#each indicator.sources as |source|}}
+        <div class="source-container d-flex align-items-center justify-content-between">
+          <div>{{source.name}}</div>
+          <div>{{source.type}}</div>
+        </div>
+      {{/each}}
+    {{else}}
+      None
+    {{/if}}
+
+
+    <h1 class="p-title">
+      {{fa-icon icon="chart-network" fixedWidth=true}} Relations
+      <a href="{{block.userOptions.appUrl}}/threatdata/indicator/{{indicator.id}}/relations" class="p-link ml-1">
+        view
+        {{fa-icon "external-link-square" class="external-link-icon"}}
+      </a>
+    </h1>
+    {{#each-in indicator.relations as |relation list|}}
+      <div class="relation-container">
+        <div class="relation-title">
+          {{humanize relation}} ({{list.length}})
+        </div>
+        {{#each list as | item |}}
+          <div class="relation-item">
+            {{item}}
+          </div>
+        {{/each}}
+      </div>
+    {{/each-in}}
+{{/each}}
