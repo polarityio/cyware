@@ -19,6 +19,22 @@ polarity.export = PolarityComponent.extend({
       } else if (indicator.tlp === 'NONE') {
         this.set(`details.indicators.${index}.tlp_class`, 'none');
       }
+
+      if (indicator.analyst_score === null || indicator.analyst_score < 30) {
+        this.set(`details.indicators.${index}.analyst_score_class`, 'green');
+      } else if (indicator.analyst_score >= 30 && indicator.analyst_score < 70) {
+        this.set(`details.indicators.${index}.analyst_score_class`, 'yellow');
+      } else {
+        this.set(`details.indicators.${index}.analyst_score_class`, 'red');
+      }
+
+      if (indicator.confidence_score === null || indicator.confidence_score < 30) {
+        this.set(`details.indicators.${index}.confidence_score_class`, 'green');
+      } else if (indicator.confidence_score >= 30 && indicator.confidence_score < 70) {
+        this.set(`details.indicators.${index}.confidence_score_class`, 'yellow');
+      } else {
+        this.set(`details.indicators.${index}.confidence_score_class`, 'red');
+      }
     });
     this._super(...arguments);
   }

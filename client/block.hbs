@@ -22,7 +22,7 @@
 
     <div>
       <span class="p-key">Confidence Score:</span>
-      <span class="p-value">
+      <span class="p-value colors {{indicator.confidence_score_class}}">
         {{#if (eq indicator.confidence_score null)}}
           0 / 100
         {{else}}
@@ -33,7 +33,7 @@
 
     <div>
       <span class="p-key">Analyst Score:</span>
-      <span class="p-value">
+      <span class="p-value colors {{indicator.analyst_score_class}}">
         {{#if (eq indicator.analyst_score null)}}
           0 / 100
         {{else}}
