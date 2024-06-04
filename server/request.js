@@ -10,7 +10,7 @@ const config = require('../config/config');
 const requestWithDefaults = createRequestWithDefaults({
   config,
   roundedSuccessStatusCodes: [200],
-  requestOptionsToOmitFromLogsKeyPaths: ['headers.Authentication'],
+  requestOptionsToOmitFromLogsKeyPaths: ['qs.AccessID', 'qs.Signature'],
   preprocessRequestOptions: async ({ route, options, ...requestOptions }) => {
     const unixTimestamp = Math.round(Date.now() / 1000);
     const expireTimestamp = unixTimestamp + 20;
@@ -32,12 +32,16 @@ const requestWithDefaults = createRequestWithDefaults({
     };
   },
   postprocessRequestFailure: (error) => {
-    const errorResponseBody = JSON.parse(error.description);
-    error.message = `${error.message} - (${error.status}) ${getOr(
-      '',
-      'errors.server.message',
-      errorResponseBody
-    )}`;
+    try {
+      const errorResponseBody = JSON.parse(error.description);
+      error.message = `${error.message} - (${error.status}) ${getOr(
+        '',
+        'errors.server.message',
+        errorResponseBody
+      )}`;
+    } catch (parseError) {
+      error.message = `${error.message} - (${error.status})`;
+    }
 
     throw error;
   }
