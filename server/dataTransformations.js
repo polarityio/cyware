@@ -4,13 +4,16 @@ const {
   get,
   flow,
   eq,
+  gte,
+    lte,
   flatMap,
   uniqWith,
   isEqual,
   identity,
   first,
   toLower,
-  some
+  some,
+  getOr
 } = require('lodash/fp');
 
 const isPrivateIP = (ip) => {
@@ -48,12 +51,14 @@ const getEntityTypes = (typesToGet, entities) => {
 const getResultForThisEntity = (
   entity,
   results,
+  options,
   onlyOneResultExpected = false,
   onlyReturnUniqueResults = false
 ) =>
   flow(
     // toLowerCase() required because hashes must be in lowercase for a match
     filter(flow(get('name'), eq(entity.value.toLowerCase()))),
+    filter(flow(getOr(0, 'analyst_score'), lte(options.minScore))),
     onlyReturnUniqueResults ? uniqWith(isEqual) : identity,
     onlyOneResultExpected ? first : identity
   )(results);

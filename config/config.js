@@ -62,6 +62,16 @@ module.exports = {
       type: 'password',
       userCanEdit: false,
       adminOnly: true
+    },
+    {
+      key: 'minScore',
+      name: 'Minimum Analyst Score',
+      description:
+        'The minimum analyst score an indicator should have to be returned.  An indicator with a score equal to or greater than the provided minimum will be returned. Defaults to 0. It is recommended to clear the integration cache after making changes to this setting.',
+      default: 0,
+      type: 'number',
+      userCanEdit: false,
+      adminOnly: true
     }
   ]
 };

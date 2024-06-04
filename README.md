@@ -17,6 +17,10 @@ Your Cyware Access ID
 ### Secret Key
 Your Cyware Secret Key
 
+### Minimum Analyst Score
+
+The minimum analyst score an indicator should have to be returned. An indicator with a score equal to or greater than the provided minimum will be returned. Defaults to 0. It is recommended to clear the integration cache after making changes to this setting.
+
 ## Installation Instructions
 
 Installation instructions for integrations are provided on the [PolarityIO GitHub Page](https://polarityio.github.io/).

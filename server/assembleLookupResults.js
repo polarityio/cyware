@@ -25,11 +25,13 @@ const assembleLookupResults = (entities, indicators, options) =>
   }, entities);
 
 const getResultsForThisEntity = (entity, indicators, options) => ({
-  indicators: getResultForThisEntity(entity, indicators)
+  indicators: getResultForThisEntity(entity, indicators, options)
 });
 
 const createSummaryTags = ({ indicators }, options) => {
   const tags = [];
+  // Note, it appears that only a single indicator will ever be returned but keeping this logic
+  // as a precaution
   if (indicators.length > 1) {
     tags.push(`Indicators: ${indicators.length}`);
   } else if (indicators.length === 1) {
