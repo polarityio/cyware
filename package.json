@@ -1,6 +1,6 @@
 {
-  "name": "dataminr",
-  "version": "3.0.0",
+  "name": "cyware",
+  "version": "3.0.1",
   "main": "./integration.js",
   "private": true,
   "dependencies": {
