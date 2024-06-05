@@ -8,7 +8,7 @@ For more information on Cyware, please visit [official website](https://www.cywa
 |------------------------------------------|--------------------------------------------|
 | *IP Address Example*                     | *Hash Example*                             |
 
-## Dataminr Integration Options
+## Cyware Integration Options
 ### Cyware API URL
 The base URL of the Cyware API including the scheme (i.e., https://). For example, `https://myorg.cyware.com/ctixapi`
 
