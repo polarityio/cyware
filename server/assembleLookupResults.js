@@ -1,5 +1,6 @@
 const { size, map, some } = require('lodash/fp');
 const { getResultForThisEntity } = require('./dataTransformations');
+const { DateTime } = require('luxon');
 
 const {
   logging: { getLogger }
@@ -37,7 +38,11 @@ const createSummaryTags = ({ indicators }, options) => {
   } else if (indicators.length === 1) {
     const indicator = indicators[0];
     tags.push(`Score: ${indicator.analyst_score === null ? 0 : indicator.analyst_score}`);
-    tags.push(`Confidence: ${indicators[0].confidence_score}`);
+    tags.push(`Confidence: ${indicator.confidence_score}`);
+    tags.push(`TLP: ${indicator.tlp}`);
+    if (indicator.valid_until) {
+      tags.push(`Valid to: ${DateTime.fromISO(indicator.valid_until).toFormat('DD')}`);
+    }
   }
   return tags;
 };
