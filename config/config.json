@@ -3,8 +3,19 @@
   "name": "Cyware",
   "acronym": "CY",
   "description": "Search Cyware",
-  "entityTypes": ["IPv4", "IPv6", "MD5", "SHA1", "SHA256", "domain", "url", "email"],
-  "styles": ["./client/styles.less"],
+  "entityTypes": [
+    "IPv4",
+    "IPv6",
+    "MD5",
+    "SHA1",
+    "SHA256",
+    "domain",
+    "url",
+    "email"
+  ],
+  "styles": [
+    "./client/styles.less"
+  ],
   "defaultColor": "light-blue",
   "onDemandOnly": true,
   "block": {
@@ -71,5 +82,10 @@
       "userCanEdit": false,
       "adminOnly": true
     }
-  ]
+  ],
+  "reducer": {
+    "details": {
+      "file": "./reducers/details.json"
+    }
+  }
 }

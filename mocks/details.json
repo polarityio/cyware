@@ -1,0 +1,58 @@
+{
+  "indicators": [
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "malicious-domain.com",
+      "ioc_type": "domain",
+      "confidence_score": 85,
+      "analyst_score": 92,
+      "tags": [
+        "malware",
+        "phishing",
+        "apt28",
+        "credential-harvesting"
+      ],
+      "first_seen": "2024-01-15T08:30:00Z",
+      "valid_from": "2024-01-15T08:30:00Z",
+      "valid_until": "2024-07-15T08:30:00Z",
+      "is_false_positive": false,
+      "is_whitelisted": false,
+      "is_deprecated": false,
+      "is_reviewed": true,
+      "manual_review": false,
+      "tlp": "AMBER",
+      "description": "Domain associated with credential phishing campaigns targeting financial institutions. Part of APT28 infrastructure.",
+      "ctix_created": "2024-01-15T09:00:00Z",
+      "ctix_modified": "2024-01-20T14:30:00Z",
+      "sources": [
+        {
+          "name": "AlienVault OTX",
+          "type": "threat_intelligence"
+        },
+        {
+          "name": "Internal Analysis",
+          "type": "manual"
+        }
+      ],
+      "relations": {
+        "related_ips": [
+          "192.0.2.45",
+          "198.51.100.23"
+        ],
+        "associated_malware": [
+          "Emotet",
+          "TrickBot"
+        ]
+      },
+      "threat_type": "malware",
+      "severity": "high",
+      "published_date": "2024-01-15T08:30:00Z",
+      "subscriber_count": 42,
+      "internal_metadata": {
+        "processing_timestamp": "2024-01-15T09:05:23Z",
+        "raw_intel_id": "intel_98765",
+        "confidence_level": "high"
+      }
+    }
+  ]
+}

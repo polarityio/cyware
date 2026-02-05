@@ -1,0 +1,56 @@
+{
+  "root": {
+    "path": "",
+    "on_null": "return_empty"
+  },
+  "pipeline": [
+    {
+      "op": "copy",
+      "from": "indicators[].ioc_type",
+      "to": "reduced_results.indicators_ioc_type"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].confidence_score",
+      "to": "reduced_results.indicators_confidence_score"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].analyst_score",
+      "to": "reduced_results.indicators_analyst_score"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].tags",
+      "to": "reduced_results.indicators_tags"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].first_seen",
+      "to": "reduced_results.indicators_first_seen"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].valid_until",
+      "to": "reduced_results.indicators_valid_until"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].is_false_positive",
+      "to": "reduced_results.indicators_is_false_positive"
+    },
+    {
+      "op": "copy",
+      "from": "indicators[].is_whitelisted",
+      "to": "reduced_results.indicators_is_whitelisted"
+    },
+    {
+      "op": "prune",
+      "strategy": "empty_values",
+      "target": "reduced_results"
+    }
+  ],
+  "output": {
+    "result": "$working.reduced_results"
+  }
+}
